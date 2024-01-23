@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
+
 from . models import Finch
+
 
 # Create your views here.
 def home(request):
@@ -12,9 +15,6 @@ def about(request):
 
 def finches_index(request):
     finches = Finch.objects.all()
-
-    for finch in finches:
-        print(finch)
 
     return render(request, 'finches/index.html', {
         'finches': finches
@@ -30,3 +30,4 @@ def finches_detail(request, finch_id):
 class FinchCreate(CreateView):
     model = Finch
     fields = '__all__'
+    # success_url = '/finches/{finch_id}'
