@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from django.views.generic.edit import CreateView
 from . models import Finch
 
 # Create your views here.
@@ -14,7 +15,18 @@ def finches_index(request):
 
     for finch in finches:
         print(finch)
-        
+
     return render(request, 'finches/index.html', {
         'finches': finches
     })
+
+def finches_detail(request, finch_id):
+    finch = Finch.objects.get(id=finch_id)
+
+    return render(request, 'finches/detail.html', { 
+        'finch': finch 
+    })
+
+class FinchCreate(CreateView):
+    model = Finch
+    fields = '__all__'
