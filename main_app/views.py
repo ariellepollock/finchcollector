@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
 from . models import Finch
@@ -31,3 +31,11 @@ class FinchCreate(CreateView):
     model = Finch
     fields = '__all__'
     # success_url = '/finches/{finch_id}'
+
+class FinchUpdate(UpdateView):
+    model = Finch
+    fields = ['breed', 'description', 'age']
+
+class FinchDelete(DeleteView):
+    model = Finch
+    success_url = '/finches'
