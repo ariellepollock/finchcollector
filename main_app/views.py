@@ -5,6 +5,8 @@ from django.views.generic.detail import DetailView
 
 from . models import Finch
 
+from . forms import FeedingForm
+
 
 # Create your views here.
 def home(request):
@@ -23,8 +25,10 @@ def finches_index(request):
 def finches_detail(request, finch_id):
     finch = Finch.objects.get(id=finch_id)
 
+    feeding_form = FeedingForm()
+
     return render(request, 'finches/detail.html', { 
-        'finch': finch 
+        'finch': finch, 'feeding_form': feeding_form 
     })
 
 class FinchCreate(CreateView):
